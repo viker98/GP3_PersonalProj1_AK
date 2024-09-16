@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator MissSpriteTimer()
     {
+        HitSprite.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         MissSprite.SetActive(false);
     }
@@ -39,7 +40,7 @@ public class UIManager : MonoBehaviour
 
     public void HitNote()
     {
-        HitSprite.SetActive(true);
+       
         HitParticle.Play();
         Debug.Log("Hit hit");
         _Score += 10 * _Multiplier;

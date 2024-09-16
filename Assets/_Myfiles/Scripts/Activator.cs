@@ -10,7 +10,7 @@ public class Activator : MonoBehaviour
 
     private void Awake()
     {
-        _UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _UIManager = FindFirstObjectByType<UIManager>();
     }
 
     public void ButtonIsPressed()
@@ -29,7 +29,7 @@ public class Activator : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D note)
     {
-        note.GetComponent<Note>().LeftZone();
+        note.GetComponent<Note>()?.LeftZone();
         if (_buttonPressed == false)
         {
             _UIManager.MissedNote();

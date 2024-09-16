@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] Notes;
+    [SerializeField] Note[] Notes;
     [SerializeField] GameObject[] Activators;
     [SerializeField] float BPM = 5;
 
@@ -26,12 +26,14 @@ public class GameManager : MonoBehaviour
 
         _AudioSorce = GetComponent<AudioSource>();
 
-        Notes = GameObject.FindGameObjectsWithTag("Note");
+        Notes = FindObjectsByType<Note>(FindObjectsSortMode.InstanceID);
 
         for (int i = Notes.Count() - 1; i >= 0; i--) 
         {
-            Notes[i].GetComponent<Note>().ChangeSpeed(BPM);
+            Notes[i].ChangeSpeed(BPM);
         }
+        //PlayerControlls playerCtrl = new PlayerControlls();
+        //playerCtrl.ActivateActivators.GreenActivator.performed += (X) => Activators[0].GetComponent<Activator>().ButtonIsPressed();
     }
 
     void Start()
