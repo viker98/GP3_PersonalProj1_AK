@@ -7,7 +7,7 @@ public class MenuOptions : MonoBehaviour
 {
     public void QuitGame()
     {
-        Application.Quit(1);
+        Application.Quit();
     }
     public void LoadGame()
     {

@@ -24,7 +24,7 @@ public class SongSaver : MonoBehaviour
     public void PlaySongSoFar()
     {
         
-        _gameManager.GetNoteParent().transform.position = new Vector3(0,5,0);
+        _gameManager.GetNoteParent().transform.position = new Vector3(0,((_gameManager.GetBPM() /60f) * 5) / 2,0);
         _audioSource.Stop();
         _gameManager.TurnOffSongCreator();
         StartCoroutine(_gameManager.PlaySoundAfterFiveSeconds());

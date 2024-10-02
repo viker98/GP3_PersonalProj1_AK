@@ -25,19 +25,7 @@ public class Activator : MonoBehaviour
 
         NoteHolder.GetComponent<Note>().ChangeSpeed(_gameManager.GetBPM() * 2);
         NoteHolder.GetComponent<Note>().SetbInSongCreator(_gameManager.AskIfInSongCreator());
-        NoteHolder.GetComponent<Note>().bAreNoteHolder = true;
-    }
-    public GameObject GetNoteHolder()
-    {
-        return NoteHolder;
-    }
-    public Transform GetNotePlacement()
-    {
-        return NotePlacement;
-    }
-    public UIManager GetUIManager()
-    {
-        return _UIManager;
+        NoteHolder.GetComponent<Note>().SetNoteHolder(true);
     }
     public void ButtonIsPressed()
     {
@@ -54,6 +42,18 @@ public class Activator : MonoBehaviour
         {
             _buttonPressed = true;       
         }
+    }
+    public GameObject GetNoteHolder()
+    {
+        return NoteHolder;
+    }
+    public Transform GetNotePlacement()
+    {
+        return NotePlacement;
+    }
+    public UIManager GetUIManager()
+    {
+        return _UIManager;
     }
 
     public void TurnOnSongCreator()

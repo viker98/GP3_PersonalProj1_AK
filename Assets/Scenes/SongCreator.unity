@@ -136,6 +136,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -6694787193419859485, guid: 6581982c65f20a044867ae71b2de89aa, type: 3}
+      propertyPath: BPM
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: -6694787193419859485, guid: 6581982c65f20a044867ae71b2de89aa, type: 3}
       propertyPath: NoteParent
       value: 
       objectReference: {fileID: 716973745}
@@ -211,6 +215,11 @@ PrefabInstance:
 --- !u!1 &378874752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5758207241798222194, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+  m_PrefabInstance: {fileID: 9010109465167656367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &510946926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2815420946772491173, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
   m_PrefabInstance: {fileID: 9010109465167656367}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
@@ -578,6 +587,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2815420946772491173, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3580890732320466438, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
       propertyPath: PauseMenu
       value: 
@@ -586,6 +599,10 @@ PrefabInstance:
       propertyPath: TestSongButton
       value: 
       objectReference: {fileID: 378874752}
+    - target: {fileID: 3580890732320466438, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: ChangeBPMTextField
+      value: 
+      objectReference: {fileID: 510946926}
     - target: {fileID: 3580890732320466438, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
       propertyPath: ReEnterSongCreatorButton
       value: 
@@ -668,6 +685,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957003968869146586, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674339534530622077, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_text
+      value: "Select BPM (default 120)\n\u200B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432731049187996825, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432731049187996825, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432731049187996825, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482343996974991547, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482343996974991547, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8679363919648766155, guid: 77e9cf979596df944b325183c14bd0e8, type: 3}

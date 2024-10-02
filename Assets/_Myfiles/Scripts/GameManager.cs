@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> Notes = new List<GameObject>();
@@ -63,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         if (_UIManager.CheckIfSongIsPaused())
         {
-
+           
             _AudioSource.Pause();
             NoteParent.GetComponent<Note>().SetbPaused(_UIManager.CheckIfSongIsPaused() );
             NoteParent.transform.position = NoteParent.transform.position;

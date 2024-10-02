@@ -62,6 +62,24 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Tap(duration=0.3)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""a71bee88-69bf-4672-a96f-1c10b8bb2fcb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""fca4d2c5-67cf-48d3-a9cc-a45971b0be1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -106,6 +124,28 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Green Activator"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7227c6e-ed67-4b85-bbc2-beee60a5e7b0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e08e5b-ddfc-4bfd-b7d0-2d970b125022"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -181,6 +221,8 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
         m_ActivateActivators_RedActivator = m_ActivateActivators.FindAction("Red Activator", throwIfNotFound: true);
         m_ActivateActivators_YellowActivator = m_ActivateActivators.FindAction("Yellow Activator", throwIfNotFound: true);
         m_ActivateActivators_BlueActivator = m_ActivateActivators.FindAction("Blue Activator", throwIfNotFound: true);
+        m_ActivateActivators_Click = m_ActivateActivators.FindAction("Click", throwIfNotFound: true);
+        m_ActivateActivators_Pause = m_ActivateActivators.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +288,8 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_ActivateActivators_RedActivator;
     private readonly InputAction m_ActivateActivators_YellowActivator;
     private readonly InputAction m_ActivateActivators_BlueActivator;
+    private readonly InputAction m_ActivateActivators_Click;
+    private readonly InputAction m_ActivateActivators_Pause;
     public struct ActivateActivatorsActions
     {
         private @PlayerControlls m_Wrapper;
@@ -254,6 +298,8 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
         public InputAction @RedActivator => m_Wrapper.m_ActivateActivators_RedActivator;
         public InputAction @YellowActivator => m_Wrapper.m_ActivateActivators_YellowActivator;
         public InputAction @BlueActivator => m_Wrapper.m_ActivateActivators_BlueActivator;
+        public InputAction @Click => m_Wrapper.m_ActivateActivators_Click;
+        public InputAction @Pause => m_Wrapper.m_ActivateActivators_Pause;
         public InputActionMap Get() { return m_Wrapper.m_ActivateActivators; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -275,6 +321,12 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
             @BlueActivator.started += instance.OnBlueActivator;
             @BlueActivator.performed += instance.OnBlueActivator;
             @BlueActivator.canceled += instance.OnBlueActivator;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IActivateActivatorsActions instance)
@@ -291,6 +343,12 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
             @BlueActivator.started -= instance.OnBlueActivator;
             @BlueActivator.performed -= instance.OnBlueActivator;
             @BlueActivator.canceled -= instance.OnBlueActivator;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IActivateActivatorsActions instance)
@@ -359,5 +417,7 @@ public partial class @PlayerControlls: IInputActionCollection2, IDisposable
         void OnRedActivator(InputAction.CallbackContext context);
         void OnYellowActivator(InputAction.CallbackContext context);
         void OnBlueActivator(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

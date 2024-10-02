@@ -3,6 +3,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ForwardButtonGO;
     [SerializeField] GameObject RewindButtonGO;
     [SerializeField] GameObject PauseButtonGO;
+    [SerializeField] GameObject ChangeBPMTextField;
     [SerializeField] GameObject GreenLocationButton;
     [SerializeField] GameObject RedLocationButton;
     [SerializeField] GameObject YellowLocationButton;
@@ -26,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
 
 
+
     GameObject CurrentSelectedNote;
     List<Vector2> LaneLocations = new List<Vector2>();
     bool bIsSongPaused;
@@ -33,31 +37,11 @@ public class UIManager : MonoBehaviour
     bool finishedSong = false;
     bool bFastFoward = false;
     bool bRewinding = false;
+    private float BPMinTextBox;
+    
     int _Score = 0;
     int _Multiplier = 1;
     int _Combo = 0;
-
-    public void AddLaneLocationsToList(Vector2 location)
-    {
-        LaneLocations.Add(location);
-    }
-
-    public List<Vector2> GetLaneLocation()
-    {
-        return LaneLocations;
-    }
-
-    IEnumerator HitSpriteTimer()
-    {
-        yield return new WaitForSeconds(0.2f);
-        HitSprite.SetActive(false);
-    }
-    IEnumerator MissSpriteTimer()
-    {
-        HitSprite.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        MissSprite.SetActive(false);
-    }
 
 
     private void Awake()
@@ -70,11 +54,31 @@ public class UIManager : MonoBehaviour
         ComboText.text = ("Combo: " + _Combo);
     }
 
+    public void AddLaneLocationsToList(Vector2 location)
+    {
+        LaneLocations.Add(location);
+    }
+    public List<Vector2> GetLaneLocation()
+    {
+        return LaneLocations;
+    }
+    IEnumerator HitSpriteTimer()
+    {
+        yield return new WaitForSeconds(0.2f);
+        HitSprite.SetActive(false);
+    }
+    IEnumerator MissSpriteTimer()
+    {
+        yield return new WaitForSeconds(0.2f);
+        MissSprite.SetActive(false);
+    }
+
 
     public void HitNote()
     {
        
         HitParticle.Play();
+        HitSprite.SetActive(true);
         Debug.Log("Hit hit");
         _Score += 10 * _Multiplier;
         Debug.Log(_Score);
@@ -132,16 +136,20 @@ public class UIManager : MonoBehaviour
     {
         if (bIsSongPaused)
         {
-            bIsSongPaused = false;
+            PlaySong();
         }
         else
         {
-            bIsSongPaused = true;
+            PauseSong();
         }
     }
 
     private void FastForward()
     {
+        if (bRewinding)
+        {
+            return;
+        }
         _audioSource.pitch = _audioSource.pitch * 2;
         bFastFoward = true;
     }
@@ -152,6 +160,10 @@ public class UIManager : MonoBehaviour
     }
     private void Rewind()
     {
+        if (bFastFoward)
+        {
+            return;
+        }
         _audioSource.pitch = _audioSource.pitch * -2;
         bRewinding = true;
     }
@@ -197,7 +209,6 @@ public class UIManager : MonoBehaviour
     {
         CurrentSelectedNote.transform.position = new Vector2(LaneLocations[0].x, CurrentSelectedNote.transform.position.y);
         TurnOffMoveButtons();
-       // bIsSongPaused = false;
     }
     public void RedButtonPressed()
     {
