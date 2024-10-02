@@ -13,6 +13,11 @@ public class Note : MonoBehaviour
     private float _MoveSpeed;
     Rigidbody2D _RigidBody;
 
+    public bool bAreNoteHolder = false;
+    [SerializeField]bool _bInSongCreator = false;
+    [SerializeField]bool _Paused = false;
+    [SerializeField] GameObject ClickedSphere; 
+
     private void Awake()
     {
         _RigidBody = GetComponent<Rigidbody2D>();
@@ -24,16 +29,57 @@ public class Note : MonoBehaviour
 
     private void Start()
     {
-        float beatDuration = 60f / BPM;
+        float beatDuration = 60f / (BPM / 2);
         _MoveSpeed = _distancePerBeat / beatDuration;
+    }
+
+    public void TurnOnSphere()
+    {
+        if (ClickedSphere != null && _bInSongCreator == true)
+        {
+            ClickedSphere.SetActive(true);
+        }
+    }
+    public void TurnOffSphere()
+    {
+        ClickedSphere.SetActive(false);
     }
 
     public void LeftZone()
     {
-        Destroy(gameObject, 4);
+        Destroy(gameObject, 1);
+    }
+
+    public void SetbInSongCreator(bool value)
+    {
+        _bInSongCreator = value;
+    }
+    public void SetbPaused(bool value)
+    {
+        _Paused = value;
     }
     void Update()
     {
-        transform.Translate(Vector2.down * _MoveSpeed * Time.deltaTime);
+        if (bAreNoteHolder)
+        {
+            if (!_bInSongCreator)
+            {
+                if (_Paused)
+                {
+                    return;
+                }
+                transform.Translate(Vector2.down * _MoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                float beatDuration = 60f / (BPM/2);
+                _MoveSpeed = _distancePerBeat / beatDuration;
+                if (_Paused)
+                {
+                    return;
+                }
+                transform.Translate(Vector2.down * _MoveSpeed * Time.deltaTime);
+            }
+        }          
     }
 }

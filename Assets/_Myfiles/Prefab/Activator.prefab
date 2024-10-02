@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 107282574588218871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.16, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,3 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab16e132fcd4be4693ffbae5236bd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NoteParent: {fileID: 5504201595272202941, guid: b83118f249b0289438f59710a03ce94a, type: 3}
+  NotePrefab: {fileID: 793527374788855324, guid: 64a7e2b62d02b0c49be9acf3b28b1ee5, type: 3}
+  bSongCreator: 1

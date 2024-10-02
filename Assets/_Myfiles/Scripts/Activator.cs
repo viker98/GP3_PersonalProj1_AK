@@ -5,22 +5,75 @@ using UnityEngine;
 
 public class Activator : MonoBehaviour
 {
-    bool _buttonPressed = false;
+
+    [SerializeField] GameObject NoteHolder;
+    [SerializeField] GameObject NotePrefab;
+    [SerializeField] bool bPlaceingNotes = false;
+
+    private GameManager _gameManager;
+    private bool _buttonPressed = false;
     private UIManager _UIManager;
+    private Transform NotePlacement;
+
+
 
     private void Awake()
     {
-        _UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
-    }
+        NotePlacement = gameObject.transform;
+        _UIManager = FindObjectOfType<UIManager>();
+        _gameManager = FindObjectOfType<GameManager>();
 
+        NoteHolder.GetComponent<Note>().ChangeSpeed(_gameManager.GetBPM() * 2);
+        NoteHolder.GetComponent<Note>().SetbInSongCreator(_gameManager.AskIfInSongCreator());
+        NoteHolder.GetComponent<Note>().bAreNoteHolder = true;
+    }
+    public GameObject GetNoteHolder()
+    {
+        return NoteHolder;
+    }
+    public Transform GetNotePlacement()
+    {
+        return NotePlacement;
+    }
+    public UIManager GetUIManager()
+    {
+        return _UIManager;
+    }
     public void ButtonIsPressed()
     {
-        _buttonPressed = true;
+        if (bPlaceingNotes)
+        {
+            GameObject createdNote = Instantiate(NotePrefab, NotePlacement);
+            createdNote.transform.parent = NoteHolder.transform;
+            createdNote.GetComponent<Note>().ChangeSpeed(_gameManager.GetBPM());
+            createdNote.GetComponent<Note>().SetbInSongCreator(_gameManager.AskIfInSongCreator());
+            Debug.Log(createdNote);
+            _gameManager.AddToNoteList(createdNote);
+        }
+        else 
+        {
+            _buttonPressed = true;       
+        }
+    }
+
+    public void TurnOnSongCreator()
+    {
+        bPlaceingNotes = true;
+    }
+
+    public void DoneWithSongCreator()
+    {
+        bPlaceingNotes = false;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void OnTriggerStay2D(Collider2D note)
     {
-        if (_buttonPressed)
+        if (_buttonPressed && !bPlaceingNotes)
         {
             Destroy(note.gameObject);
             _UIManager.HitNote();
@@ -29,11 +82,16 @@ public class Activator : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D note)
     {
-        note.GetComponent<Note>().LeftZone();
-        if (_buttonPressed == false)
+        if (!bPlaceingNotes)
         {
-            _UIManager.MissedNote();
+            note.GetComponent<Note>().LeftZone();
+            if (_buttonPressed == false)
+            {
+                _UIManager.MissedNote();
+            }
+            _buttonPressed = false;
         }
-        _buttonPressed = false;
     }
+
+    
 }
